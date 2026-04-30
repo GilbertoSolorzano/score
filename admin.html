@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Score Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <h1>⚙️ Admin - Score Dashboard</h1>
+
+    <!-- Células disponibles -->
+    <div class="todas">
+        <h2>📊 Todas las Células</h2>
+        <div class="celulas-lista" id="todasCelulas">
+            <p style="color:#aaa">Cargando células...</p>
+        </div>
+    </div>
+
+    <!-- 4 Unidades -->
+    <div class="grid">
+        <div class="unidad-card">
+            <h2>🏭 F's</h2>
+            <div id="lista-0" class="lista-unidad"></div>
+        </div>
+        <div class="unidad-card">
+            <h2>🏪 Comercial</h2>
+            <div id="lista-1" class="lista-unidad"></div>
+        </div>
+        <div class="unidad-card">
+            <h2>⚡ Electronicas</h2>
+            <div id="lista-2" class="lista-unidad"></div>
+        </div>
+        <div class="unidad-card">
+            <h2>🔒 Deadbolts</h2>
+            <div id="lista-3" class="lista-unidad"></div>
+        </div>
+    </div>
+
+    <button class="guardar" onclick="guardar()">💾 Guardar Configuración</button>
+    <p class="saved-msg" id="savedMsg">✅ Configuración guardada!</p>
+
+    <!-- Links a las 4 páginas -->
+    <div class="links">
+        <a href="index.html?unit=0&name=F's" target="_blank">🏭 F's</a>
+        <a href="index.html?unit=1&name=Comercial" target="_blank">🏪 Comercial</a>
+        <a href="index.html?unit=2&name=Electronicas" target="_blank">⚡ Electronicas</a>
+        <a href="index.html?unit=3&name=Deadbolts" target="_blank">🔒 Deadbolts</a>
+    </div>
+
+<script src="admin.js"></script>
+</body>
+</html>
