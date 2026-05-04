@@ -10,47 +10,29 @@
             if(e.altKey && e.key === 'ArrowLeft') e.preventDefault()
         })
     </script>
+   
+   
 </head>
 <body>
     <div class="dashboard">
-        <h1 id="tituloUnidad" style="
-            color: rgb(0, 0, 0);
-            text-align: center;
-            font-size: 2rem;
-            margin: 10px 0;
-            z-index: 100;
-            position: relative;
-        "></h1>
-
-        <!-- Lo demás que ya tienes -->
-        <div class="sky"></div>
-        <div class="ground"></div>
-        <div class="scale">
-         
+        <h1 id="tituloUnidad"></h1>
+        <h2 id="tituloUnidad">Rechazos semanales</h2>
+        <div class="turno-switch">
+            <button class="turno-btn active" id="btn1" onclick="setTurno(1)">🔵 Turno 1</button>
+            <button class="turno-btn" id="btn2" onclick="setTurno(2)">🔴 Turno 2</button>
         </div>
+        <div class="scale">Rechazos</div>
+           
 
         <div class="sky">
-            <img src="assets/nube.png" class="cloud cloud-1" alt="nube">
-            <img src="assets/nube.png" class="cloud cloud-2" alt="nube">
-            <img src="assets/nube.png" class="cloud cloud-3" alt="nube">
-            <img src="assets/nube.png" class="cloud cloud-4" alt="nube">
-            <img src="assets/nube.png" class="cloud cloud-5" alt="nube">
+            
             <div id="alertaContainer"></div>
             <div id="rocketContainer"></div>
         </div>
-
-        <div class="ground"></div>
-        <div class="turno-switch">
-            <button class="turno-btn active" id="btn1" onclick="setTurno(1)">
-                🔵 Turno 1
-            </button>
-            <button class="turno-btn" id="btn2" onclick="setTurno(2)">
-                🔴 Turno 2
-            </button>
-        </div>
-    </div>
-
-    <!-- 👇 Primero el componente, luego el script -->
+      
+        
+</div>
+   
     <script src="script.js"></script>
 </body>
 </html>
