@@ -74,17 +74,16 @@ body {
 
 
 .lane {
-    border-radius: 50px;
     position: relative;
     background: #888;
     border-bottom: 2px solid rgba(255,255,255,0.3);
     display: flex;
     align-items: center;
-    min-height: 150px;
-    margin: 20px;
-    margin-bottom: 0px;
-    border-radius: 20px;  /* ✅ Opcional - bordes redondeados */
-    border: 6px solid rgba(0, 0, 0);
+    min-height: 120px;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-right: 6px solid rgba(0, 0, 0);
+    border-left: 6px solid rgba(0, 0, 0);
 }
 
 .lane:nth-child(odd) { background: #999; }
@@ -101,6 +100,7 @@ body {
 
 
 .car {
+    bottom:10px;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@ body {
 .rocket-img { 
    
     position: relative;
-     z-index: 50; /* ← También aquí */
+    z-index: 50; /* ← También aquí */
     width: 125px; 
     
 }

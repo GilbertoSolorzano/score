@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: #1a1a2e;
+    background-color: rgb(113, 60, 31);
     color: white;
     font-family: Arial, sans-serif;
     padding: 30px;
@@ -11,7 +11,7 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 28px;
-    color: #87CEEB;
+    color: #4f7888;
 }
 
 .grid {
@@ -161,4 +161,41 @@ h1 {
 
 .btn-abrir:hover {
     background: rgba(255,255,255,0.3);
+}
+
+.turno-switch-1{
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+.turno-switch-2 {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.turno-btn {
+    background: rgba(255,255,255,0.3);
+    align-items: left;
+    color: black;
+    border: 2px solid rgba(63, 56, 56, 0.554);
+    padding: 8px 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.turno-btn.active {  
+    
+    background: rgba(246, 228, 228, 0.631);
+    border-color: black;
+    font-weight: bold;
+    
 }
