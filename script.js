@@ -46,66 +46,78 @@ function meta (){
 function Rockets(celulas) {
     const container  = document.getElementById('rocketContainer')
     const container2 = document.getElementById('alertaContainer')
-
-    // ✅ Limpia siempre primero
-    container.innerHTML  = ''
-    container2.innerHTML = ''
-
+   
     if(!celulas || celulas.length === 0) {
-        container2.innerHTML = `<p class="error">⚠️ No hay células asignadas!</p>`
+        container2.innerHTML = `<p class="error">No hay células asignadas</p>`
         return             
     }
  
     const maxT1      = Math.max(...celulas.map(c => c['[Turno1]'] || 0))
     const maxT2      = Math.max(...celulas.map(c => c['[Turno2]'] || 0))
-    const MAX_ESCALA = Math.max(maxT1, maxT2) + 5
+    const MAX_ESCALA = Math.max(maxT1, maxT2) + 4
 
-    // ✅ Escala horizontal arriba
+    // ✅ Dibuja escala primero
     const scaleContainer = document.querySelector('.scale')
-    if(scaleContainer) {
-        scaleContainer.innerHTML = ''
-        for(let i = MAX_ESCALA; i >= 0; i--) {  
-            const span = document.createElement('span')
-            span.textContent = i
-            scaleContainer.appendChild(span)
-        }
+    scaleContainer.innerHTML = ''
+    for(let i = MAX_ESCALA; i >= 0; i--) {  
+        const span = document.createElement('span')
+        span.textContent = i
+        scaleContainer.appendChild(span)
     }
 
-    // ✅ Un carril por célula
+    // ✅ Lee posición REAL de cada número en pantalla
+    // ✅ Posición real de la escala
+    const spans = scaleContainer.querySelectorAll('span')
+    const spanPositions = {}
+    spans.forEach((span, index) => {
+        const num = MAX_ESCALA - index
+        const rect = span.getBoundingClientRect()
+        spanPositions[num] = rect.left + rect.width / 2
+    })
+
+    const CAR_WIDTH  = 10   // ← Ancho del carro
+    const FLAG_WIDTH = 50  // ← Ancho de la bandera
+
+    function calcPos(valor) {
+        const centroNumero = spanPositions[valor] ?? spanPositions[0]
+        const pos    = centroNumero - CAR_WIDTH
+        const limite = window.innerWidth - FLAG_WIDTH - CAR_WIDTH  // ← Límite antes de bandera
+
+        return Math.min(pos, limite)  // ← Nunca pasa la bandera!
+    }
+
     celulas.forEach((celula) => {
-    const nombre = celula['[Cell_Name]']
-    const t1     = celula['[Turno1]'] || 0
-    const t2     = celula['[Turno2]'] || 0
+        const nombre = celula['[Cell_Name]']
+        const t1     = celula['[Turno1]'] || 0
+        const t2     = celula['[Turno2]'] || 0
 
-    // ✅ Limita entre 5% y 95% para que no salga de pantalla
-    const posT1 = Math.min(89, Math.max(5, 100 - (t1 / MAX_ESCALA) * 100))
-    const posT2 = Math.min(89, Math.max(5, 100 - (t2 / MAX_ESCALA) * 100))
+        const posT1 = calcPos(t1)
+        const posT2 = calcPos(t2)
 
-    const lane = document.createElement('div')
-    lane.className = 'lane'
-    lane.innerHTML = `
-        <span class="cell-label">${nombre}</span>
+        const lane = document.createElement('div')
+        lane.className = 'lane'
+        lane.innerHTML = `
+            <span class="cell-label">${nombre}</span>
 
-        <div class="car car-t1 ${turnoActivo !== 1 ? 'tenue' : ''}" 
-             style="left: calc(${posT1}% - 25px)">
-            <img src="assets/CarroF1-2.png" class="rocket-img">
-            <p class="rocket-score">${t1} rej.</p>
-        </div>
+            <!-- ✅ Turno 1 ARRIBA del carril -->
+            <div class="car car-t1 ${turnoActivo !== 1 ? 'tenue' : ''}" 
+                style="left: ${posT1}px; ">
+                <img src="assets/CarroF1-2.png" class="rocket-img">
+                <p class="rocket-score">${t1} Rechazos</p>
+            </div>
 
-        <div class="car car-t2 ${turnoActivo !== 2 ? 'tenue' : ''}" 
-             style="left: calc(${posT2}% - 25px)">
-            <img src="assets/CarroF1.png" class="rocket-img">
-            <p class="rocket-score">${t2} rej.</p>
-            
-        </div>
-        <div class="ground"></div>
-    `
-    container.appendChild(lane)
-})
-
+            <!-- ✅ Turno 2 ABAJO del carril -->
+            <div class="car car-t2 ${turnoActivo !== 2 ? 'tenue' : ''}" 
+                style="left: ${posT2}px;">
+                <img src="assets/CarroF1.png" class="rocket-img">
+                <p class="rocket-score">${t2} Rechazos</p>
+            </div>
+            <div class="meta"></div>
+        `
+        container.appendChild(lane)
+    })
     console.log(`✅ ${celulas.length} células | MAX: ${MAX_ESCALA}`)
 }
-
 async function init() {
     const params    = new URLSearchParams(window.location.search)
     const unitIndex = parseInt(params.get('unit')) || 0
@@ -128,3 +140,37 @@ async function init() {
 
 init()
 setInterval(init, 60000)
+// ============================================
+// ✅ AUTO SCROLL
+// ============================================
+let scrollInterval = null
+let scrollDir      = 1    // 1 = abajo, -1 = arriba
+let scrollSpeed    = 1    // ← Cambia velocidad aquí
+
+function iniciarAutoScroll() {
+    const sky = document.querySelector('.sky')
+    if(!sky) return
+
+    // ✅ Limpia intervalo anterior si existe
+    if(scrollInterval) clearInterval(scrollInterval)
+
+    scrollInterval = setInterval(() => {
+        sky.scrollTop += scrollDir * scrollSpeed
+
+        // ✅ Llegó abajo → sube
+        if(sky.scrollTop + sky.clientHeight >= sky.scrollHeight - 2) {
+            scrollDir = -1
+        }
+
+        // ✅ Llegó arriba → baja
+        if(sky.scrollTop <= 0) {
+            scrollDir = 1
+        }
+
+    }, 75) // ← 60fps
+}
+
+
+
+// ✅ Inicia al cargar la página
+iniciarAutoScroll()

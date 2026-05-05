@@ -15,23 +15,28 @@
 </head>
 <body>
     <div class="dashboard">
-        <h1 id="tituloUnidad"></h1>
-        <h2 id="tituloUnidad">Rechazos semanales</h2>
-        <div class="turno-switch">
-            <button class="turno-btn active" id="btn1" onclick="setTurno(1)">🔵 Turno 1</button>
-            <button class="turno-btn" id="btn2" onclick="setTurno(2)">🔴 Turno 2</button>
+        <div>
+            <div class="turno-switch-1">
+                <button class="turno-btn " id="btn1" onclick="setTurno(1)">🔵 Turno 1</button>    
+            </div>
+            <h1 id="tituloUnidad"></h1>
+            <div class="turno-switch-2">
+                <button class="turno-btn active" id="btn2" onclick="setTurno(2)">🔴 Turno 2</button> 
+            </div>
         </div>
-        <div class="scale">Rechazos</div>
-           
+        <div class="scale"></div>
 
         <div class="sky">
-            
             <div id="alertaContainer"></div>
             <div id="rocketContainer"></div>
         </div>
-      
+
+        <!-- ✅ AQUÍ afuera, nunca dentro del rocketContainer -->
         
-</div>
+
+        
+
+    </div>
    
     <script src="script.js"></script>
 </body>

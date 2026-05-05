@@ -21,8 +21,9 @@ body {
     font-size: 2.5rem;
     padding: 10px 0;
     color: black;
-    background: white;
+    background: rgb(255, 113, 37,0.493);
     z-index: 100;
+    
 }
 
 .scale {
@@ -31,11 +32,11 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 60px 5px 0px;
-    background-color: white;
-    border-top: rgba(0, 0, 0, 0.579) solid 2px;
-    border-bottom: rgba(0, 0, 0, 0.579) solid 2px;
+    padding: 5px 50px 5px 55px; /* ← 75px derecha = mismo que FLAG_WIDTH */
+    background-color: rgba(255, 113, 37, 0.493);
     width: 100%;
+    border-top: #000    solid 3px;
+    border-bottom: #000    solid 3px;
 }
 
 .scale span {
@@ -45,13 +46,13 @@ body {
     min-width: 20px;
     text-align: center;
 }
-
+ 
 /* ✅ SKY SIN POSITION ABSOLUTE! */
 .sky {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    background: white;
+    background: rgb(255, 113, 37,0.493);
     display: flex;
 }
 
@@ -61,13 +62,7 @@ body {
     border-radius: 3px;
 }
 
-#rocketContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-     
-}
+
 .lane {
     border-radius: 50px;
     position: relative;
@@ -76,8 +71,10 @@ body {
     display: flex;
     align-items: center;
     min-height: 150px;
-    margin-bottom: 10px; /* ✅ Espacio abajo de cada carril */
-    border-radius: 8px;  /* ✅ Opcional - bordes redondeados */
+    margin: 20px;
+    margin-bottom: 0px;
+    border-radius: 20px;  /* ✅ Opcional - bordes redondeados */
+    border: 6px solid rgba(0, 0, 0);
 }
 
 .lane:nth-child(odd) { background: #999; }
@@ -92,17 +89,34 @@ body {
     z-index: 10;
 }
 
+
 .car {
-    bottom:  5px;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: left 1s ease;
+    z-index: 50; /* ← Encima de todo! */
+
+    /* ✅ left = borde derecho del carro */
+    transform: translateX(-100%);
 }
 
-.rocket-img { width: 150px; }
 
+.rocket-img { 
+   
+    position: relative;
+     z-index: 50; /* ← También aquí */
+    width: 125px; 
+    
+}
+#rocketContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+     
+}
 .rocket-score {
     color: white;
     font-size: 20px;
@@ -110,14 +124,14 @@ body {
     text-shadow: 1px 1px 2px black;
 }
 
-.tenue { opacity: 0.3; }
+.tenue { opacity: 0.10; }
 
 /* ✅ BANDERA */
-.ground {
+.meta {
     position: absolute;
     right: 0;
     top: 0%;
-    width: 50px;
+    width: 30px;
     height: 100%;
     background-image: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%);
     background-size: 25px 25px;
@@ -126,9 +140,17 @@ body {
 }
 
 /* ✅ BOTONES */
-.turno-switch {
+.turno-switch-1{
     position: absolute;
-    top: 5%;
+    top: 2%;
+    left: 2%;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+.turno-switch-2 {
+    position: absolute;
+    top: 2%;
     right: 2%;
     display: flex;
     gap: 10px;
@@ -137,19 +159,21 @@ body {
 
 .turno-btn {
     background: rgba(0, 0, 0, 0.1);
+    align-items: left;
     color: black;
     border: 2px solid rgba(63, 56, 56, 0.554);
-    padding: 8px 20px;
+    padding: 8px 8px;
     border-radius: 20px;
     cursor: pointer;
     font-size: 20px;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .turno-btn.active {  
     background: rgba(255,255,255,0.3);
     border-color: black;
     font-weight: bold;
+    
 }
 
 #alertaContainer {

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Admin - Score Dashboard</title>
     <link rel="stylesheet" href="admin.css">
+            <div class="turno-switch">
+            <button class="turno-btn active" id="btn1" onclick="setTurno(1)">🔵 Turno 1</button>
+            <button class="turno-btn" id="btn2" onclick="setTurno(2)">🔴 Turno 2</button>
+        </div>
 </head>
 <body>
 
@@ -15,24 +19,25 @@
         <div class="celulas-lista" id="todasCelulas">
             <p style="color:#aaa">Cargando células...</p>
         </div>
+        
     </div>
 
     <!-- 4 Unidades -->
     <div class="grid">
         <div class="unidad-card">
-            <h2>🏭 F's</h2>
+            <h2>F's</h2>
             <div id="lista-0" class="lista-unidad"></div>
         </div>
         <div class="unidad-card">
-            <h2>🏪 Comercial</h2>
+            <h2>🏪Comercial</h2>
             <div id="lista-1" class="lista-unidad"></div>
         </div>
         <div class="unidad-card">
-            <h2>⚡ Electronicas</h2>
+            <h2>Electronicas</h2>
             <div id="lista-2" class="lista-unidad"></div>
         </div>
         <div class="unidad-card">
-            <h2>🔒 Deadbolts</h2>
+            <h2>Deadbolts</h2>
             <div id="lista-3" class="lista-unidad"></div>
         </div>
     </div>
